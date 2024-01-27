@@ -2,26 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.text-light-primary { color: #744545; }
+.text-light-secondary { color: white; }
+.text-light-primary-alt { color: white; }
+
+.bg-light-primary { background-color: white; } 
+.bg-light-secondary { background-color: #744545; }
+
+.border-light-primary { border-color: #744545; }
+
+.plantation-image {
+  background: url('static/images/rubber-plantation.jpeg') bottom/cover no-repeat; /* Set background image */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.gradient-40 {
+  background: linear-gradient(to right, rgba(255, 255, 255, 1) 40%, rgba(255, 255, 255, 0) 100%);
+}
+.hide {
+  display: none;
+}
+
+@layer utilities {
+  .bg-light-secondary { background: #744545; }
+  .bg-light-alt { background: #fcd2d2; }
+  .text-light-primary-alt { color: white; }
+  .gradient-40 {
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 40%, rgba(255, 255, 255, 0) 100%);
   }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  .gradient-60 {
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0.9) 60%, rgba(255, 255, 255, 0) 100%);
+  }
+  .gradient-80 {
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 30%,  rgba(255, 255, 255, 0.7) 100%);
+  }
 }
