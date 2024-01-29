@@ -25,7 +25,7 @@ export const LoginSection = ({
 
     return (
         <div className={ "flex justify-center w-screen " + className ?? ""} >
-            <form className="border-light-primary border-2 w-4/12 items-center flex flex-col rounded-xl" action={formAction}>
+            <form className="border-light-primary border-2 w-10/12 items-center flex flex-col rounded-xl xxs:w-7/12 xs:w-6/12 sm:w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12" action={formAction}>
                 <span className="text-light-primary text-xl font-bold mt-10">Admin Login</span>
                 <div className="flex flex-col mt-5">
                     <label>Username: </label>

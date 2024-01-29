@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { NavBar } from '@/components/navbar'
+import { AdminNavBar, NavBar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
@@ -19,7 +19,11 @@ export default async function AdminRootLayout({
   children: React.ReactNode
 }) {
     await verifyToken()
-    return (<div>{children}</div>)
+    return (
+        <div>
+            {children}
+        </div> 
+    )
 }
 
 const verifyToken = async () => {
@@ -45,7 +49,7 @@ const checkIfTokenIsValid = async (token: string) => {
     try {
         const apiService = new ApiService()
         const response = await apiService.get("admin/verify", {"token": token})
-        console.log(response)
+        console.log( await response.json())
         if(!response.ok){
             return false
         }

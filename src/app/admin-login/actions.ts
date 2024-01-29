@@ -19,7 +19,7 @@ export const Login = async (prevState: any, formData: FormData) => {
             username: data.username ?? "",
             password: data.password ?? ""
         }
-        const response = await apiService.post("admin/log-in", body)
+        const response = await apiService.post("admin/log-in", body, "no-cache")
         if(!response.ok){
             const responseData = await response.json()
             return {
@@ -28,6 +28,7 @@ export const Login = async (prevState: any, formData: FormData) => {
             }
         }
         const responseData = await response.json()
+        console.log(responseData)
         setHttpOnlyCookies("AUTH_TOKEN", responseData.Data?.data?.token ?? "uff")
         return {
             success: true,

@@ -20,3 +20,17 @@ export const combineDateAndTime = (date: Date, time: Date): Date => {
 
     return new Date(year, month, day, hours, minutes, seconds);
 }
+
+export const prettierDate = (isoDate: string) => {
+    const dateObj = new Date(isoDate)
+    const options: Intl.DateTimeFormatOptions = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      };
+      
+    return new Intl.DateTimeFormat("en-US", options).format(dateObj);
+}
