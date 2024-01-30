@@ -2,7 +2,8 @@ import { Footer } from "@/components/footer";
 import { AdminNavBar } from "@/components/navbar";
 import { ApiService } from "@/utils/api-services";
 import { GetAuthToken } from "@/utils/auth-token-cookie";
-import { MessageBox } from "./client-components";
+import { MessageBox, MessageList } from "./client-components";
+import { CustomCheckBox } from "@/components/custom-checkbox";
 
 
 export default function MessagesPage(){
@@ -25,42 +26,19 @@ const MessagesSection = async ({
     return (
         <div className={className?? ""}>    
             <div>
-                <MessageTitle />
-                {messages?.map( (message, i) =>{
-                    return <MessageBox className="my-3" message={message} key={i}/>
-                })}
+                <MessageList messages={messages??[]}/>
             </div>
         </div>
     )
 }
 
 
-
-const MessageTitle = ({
-    className,
-}:{
-    className?: string
-}) => {
-
-    return(
-        <div className={className ?? ""}>
-            <a href=""> 
-                <div className="flex flex-row justify-between px-5 py-3 rounded-xl text-lg">
-                    <span className="">Name</span>
-                    <span className="">Date</span>
-                    <span className="">Read Status</span>
-                </div>
-            </a>
-        </div>
-    )
-}
-
 export type Message = {
     Id: number
     Name: string,
     Email: string,
     Message: string,
-    Read: false,
+    Read: boolean,
     ReceivedAt: string
 }
 

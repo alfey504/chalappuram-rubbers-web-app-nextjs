@@ -11,12 +11,13 @@ export const messageRead = async (id: number) => {
         const response  =  await apiService.put("admin/message", {id: id, read: true}, undefined, token)
         if(!response.ok){
             console.log(response)
-            return
+            return false
         }
         const responseData = await response.json()
         console.log(responseData)
-        revalidatePath("/")
+        return true
     }catch(e){
         console.log(e)
+        return false
     }
 }

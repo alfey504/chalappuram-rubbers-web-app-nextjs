@@ -4,14 +4,16 @@ import { prettierDate } from "@/utils/datetime-utils"
 import { Message } from "./page"
 import { useState } from "react"
 import { messageRead } from "./actions"
+import { CustomCheckBox } from "@/components/custom-checkbox"
 
 export const MessageBox = ({
     className,
-    message,
+    message
 }:{
     className?: string,
     message: Message
 }) => {
+
     const [ extended, setExtended ] = useState(false)
     const [ messageReadUpdating, setMessageReadUpdating ] = useState(false)
     
@@ -25,7 +27,7 @@ export const MessageBox = ({
     const setMessageRead = async () => {
         if(!message.Read){
             setMessageReadUpdating(true)
-            await messageRead(message.Id)
+            if(await messageRead(message.Id)) {message.Read = true}
             setMessageReadUpdating(false)
         }
     }
@@ -46,6 +48,81 @@ export const MessageBox = ({
                             <span className="mt-2">{message.Message}</span>
                         </div>
                     }
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+
+const MessageTitle = ({
+    className,
+}:{
+    className?: string
+}) => {
+
+    return(
+        <div className={className ?? ""}>
+            <div className="flex flex-row justify-between px-5 py-3 rounded-xl text-lg">
+                <span className="">Name</span>
+                <span className="">Date</span>
+                <span className="">Read Status</span>
+            </div>
+        </div>
+    )
+}
+
+export const MessageList = ({
+    messages,
+    className,
+}: {
+    messages: Message[],
+    className?: string
+}) => {
+
+    const [ showReadMessages, setShowReadMessages ] = useState(true)    
+
+    const filteredMessage = function(){
+        if(showReadMessages){ return messages }
+        return messages.filter((message)=>{
+            return !message.Read
+        })
+    }()
+
+    const onClick = () => {
+        setShowReadMessages((prevState) => {
+            return !prevState
+        })
+    }
+
+    return (
+        <div className={className??""}>
+            <ShowReadMessagesButton checked={showReadMessages} onClick={onClick}/>
+            <MessageTitle />
+            {filteredMessage?.map( (message, i) =>{
+                return <MessageBox className="my-3" message={message} key={i}/>
+            })}
+        </div>
+    )
+}
+
+const ShowReadMessagesButton = ({
+    className,
+    onClick,
+    checked,
+}:{
+    className?: string,
+    onClick?: ()=>void,
+    checked: boolean
+}) => {
+
+    return(
+        <div className={className ?? ""}>
+            <div className="flex flex-row justify-end px-5 py-3 rounded-xl text-lg">
+                <div className="flex flex-row items-center">
+                    <CustomCheckBox onClick={onClick} checked={checked}/>
+                    <span className="text-light-primary ml-2"> show read messages</span>
                 </div>
             </div>
         </div>
