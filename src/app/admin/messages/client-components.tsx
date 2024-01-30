@@ -6,7 +6,7 @@ import { useState } from "react"
 import { messageRead } from "./actions"
 import { CustomCheckBox } from "@/components/custom-checkbox"
 
-export const MessageBox = ({
+const MessageBox = ({
     className,
     message
 }:{
@@ -36,11 +36,11 @@ export const MessageBox = ({
         <div className={className ?? ""}>
             <div onClick={onClick}> 
                 <div className="flex flex-col border-2 border-light-primary justify-between px-5 py-3 rounded-xl hover:text-white hover:bg-light-secondary ">
-                    <div className="flex flex-row">
+                    <div className="flex flex-col md:flex-row">
                         <span className=" w-1/2 text-left">{message.Name}</span>
-                        <span className=" w-1/2 text-center">{prettierDate(message.ReceivedAt)}</span>
-                        {messageReadUpdating && <span className={"w-1/2 text-right"}>Loading..</span>}
-                        {!messageReadUpdating && <span className={(message.Read)? "w-1/2 text-right text-green-600 ": "w-1/2 text-right text-red-600"}>{(message.Read)?"Read":"Unread"}</span>}
+                        <span className=" w-1/2 text-left md:text-center">{prettierDate(message.ReceivedAt)}</span>
+                        {messageReadUpdating && <span className={"w-1/2 text-left md:text-right"}>Loading..</span>}
+                        {!messageReadUpdating && <span className={(message.Read)? "w-1/2 text-left md:text-right text-green-600 ": "w-1/2 text-right text-red-600"}>{(message.Read)?"Read":"Unread"}</span>}
                     </div>
                     {extended &&
                         <div className="flex flex-col mt-3">
@@ -64,7 +64,7 @@ const MessageTitle = ({
 
     return(
         <div className={className ?? ""}>
-            <div className="flex flex-row justify-between px-5 py-3 rounded-xl text-lg">
+            <div className="flex flex-row justify-between px-5 py-3 rounded-xl text-lg font-semibold text-light-primary">
                 <span className="">Name</span>
                 <span className="">Date</span>
                 <span className="">Read Status</span>
@@ -100,6 +100,12 @@ export const MessageList = ({
         <div className={className??""}>
             <ShowReadMessagesButton checked={showReadMessages} onClick={onClick}/>
             <MessageTitle />
+            {filteredMessage == undefined &&
+                <div className="text-center text-light-primary mt-5"> There was some issues getting the messages</div>
+            }
+            {filteredMessage != undefined && filteredMessage.length <= 0 &&
+                <div className="text-center text-light-primary mt-5"> There are no messages </div>
+            }
             {filteredMessage?.map( (message, i) =>{
                 return <MessageBox className="my-3" message={message} key={i}/>
             })}

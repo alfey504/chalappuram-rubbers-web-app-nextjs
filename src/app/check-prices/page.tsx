@@ -91,7 +91,7 @@ type GoodsPrices = {
 const getGoodsPrices = async () => {
     try {
         const apiService = new ApiService()
-        const response = await apiService.get("goods")
+        const response = await apiService.get("goods", {}, undefined, "no-cache")
         const data = await response.json()
         const goodsPrices: GoodsPrices = data.Data.data
         return {success: true, data: goodsPrices, message: "success"}

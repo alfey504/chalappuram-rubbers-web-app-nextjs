@@ -22,6 +22,16 @@
   display: none;
 }
 
+.bottom-0-x {
+  bottom: 0;
+}
+
+.min-h-vh-100 {
+  min-height: 100vh;
+}
+
+
+
 @layer utilities {
   .bg-light-secondary { background: #744545; }
   .bg-light-alt { background: #fcd2d2; }

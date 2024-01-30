@@ -1,6 +1,14 @@
 export class ApiService {
 
-    baseURI = new URL("http://localhost:8080/api/")
+    baseURI: URL
+
+    constructor(){
+        if(process.env.PROD != undefined && process.env.PROD === "local"){
+            this.baseURI = new URL("http://localhost:8080/api/")
+        }else{
+            this.baseURI = new URL("https://chalappuram-rubbers-backend-go-production.up.railway.app/api/")
+        }
+    }
 
     async post(
         endpoint: string, 

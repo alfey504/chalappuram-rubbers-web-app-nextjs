@@ -5,10 +5,8 @@ import { AppointmentsSection } from "./client-componets";
 
 export default function Appointments(){
     return(
-        <main>
-            <AdminNavBar />
-            <AppointmentsSection className="mx-44 my-10"/>
-            <Footer />
+        <main className=" min-h-screen h-full">
+            <AppointmentsSection className="mx-3 my-10 lg:mx-44"/>
         </main>
     )
 }

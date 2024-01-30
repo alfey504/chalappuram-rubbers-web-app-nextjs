@@ -2,16 +2,13 @@ import { Footer } from "@/components/footer";
 import { AdminNavBar } from "@/components/navbar";
 import { ApiService } from "@/utils/api-services";
 import { GetAuthToken } from "@/utils/auth-token-cookie";
-import { MessageBox, MessageList } from "./client-components";
-import { CustomCheckBox } from "@/components/custom-checkbox";
+import { MessageList } from "./client-components";
 
 
 export default function MessagesPage(){
     return (
-        <div>
-            <AdminNavBar />
-            <MessagesSection className=" mx-64 my-10"/>
-            <Footer />
+        <div className="min-h-screen">
+            <MessagesSection className=" mx-2 sm:mx-10 md:mx-14 lg:mx-32 xl:mx-64 my-10"/>
         </div>
     )
 }

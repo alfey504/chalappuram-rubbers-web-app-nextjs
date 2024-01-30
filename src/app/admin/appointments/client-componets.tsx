@@ -42,17 +42,17 @@ export const AppointmentsSection = ({
     return (
         <div className={className ?? ""}>
             <div className="flex flex-col">
-                <label className="text-lg">Date :</label>
-                <input className="border-2 border-light-primary rounded-md w-1/4 text-xl px-2 py-2 mt-4" type="date" defaultValue={todaysDate} onChange={(e)=>{setDate(e.target.value)}}/>
+                <label className="text-lg text-light-primary font-bold">Date :</label>
+                <input className="border-2 border-light-primary rounded-md w-1/2 sm:w-1/3 lg:1/4 text-xl px-2 py-2 mt-4" type="date" defaultValue={todaysDate} onChange={(e)=>{setDate(e.target.value)}}/>
             </div>
             {loading &&
-                <div className="mt-10"> Loading.. </div>
+                <div className="mt-10 text-light-primary"> Loading.. </div>
             }
             {!loading &&
                 <AppointmentListSection appointments={appointmentList} className="mt-7"/>
             }
             {!loading && appointmentList.length <= 0 &&
-                <div className="mt-10"> There are no appointments on {date} </div>
+                <div className="mt-10 text-light-primary"> There are no appointments on {date} </div>
             }
         </div>
     )
@@ -84,10 +84,25 @@ const AppointmentBox = ({
 }) => {
     return (
         <div className={className ?? "" }>
-            <div className="flex flex-row px-4 py-4 border-2 border-light-primary my-4 rounded-md justify-between text-lg"> 
-                <span className="w-1/2 text-left">{appointment.FullName}</span>
-                <span className="w-1/2 text-center">{appointment.Email}</span>
-                <span className="w-1/2 text-right">{appointment.AppointmentTime}</span>
+            <div className="flex flex-col lg:flex-row px-4 py-4 border-2 border-light-primary my-4 rounded-md justify-between text-lg "> 
+                <div className="flex flex-col justify-center w-1/3">
+                    <div className="flex flex-col items-start">
+                        <div className="mr-2 text-light-primary font-bold">Name : </div>
+                        <span className="text-left md:text-left"> {appointment.FullName}</span>
+                    </div>
+                </div>
+                <div className="flex flex-col mt-2 w-1/3 justify-center">
+                    <div className="flex flex-col items-start">
+                        <div className="mr-2 text-light-primary font-bold">Email : </div>
+                        <span className="text-left md:text-left">{appointment.Email}</span>
+                    </div>
+                </div>
+                <div className="flex flex-col mt-2 justify-center w-1/3">
+                    <div className="flex flex-col items-start lg:items-end">
+                        <div className="text-light-primary font-bold">Time:</div>
+                        <span className="text-left md:text-left">{appointment.AppointmentTime}</span>
+                    </div>
+                </div>
             </div>
         </div>
     )

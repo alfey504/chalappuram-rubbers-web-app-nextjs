@@ -2,6 +2,6 @@
 
 export default function AdminHome(){
     return (
-        <div>Sudalamani</div>
+        <div>Admin_test</div>
     )
 }
