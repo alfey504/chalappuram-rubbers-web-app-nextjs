@@ -20,11 +20,13 @@ export default async function AdminRootLayout({
 }) {
     await verifyToken()
     return (
-        <div>
-            <AdminNavBar />
-            {children}
-            <Footer className="mt-10"/>
-        </div> 
+        <html lang="en">
+            <body className={inter.className}>
+                <AdminNavBar />
+                {children}
+                <Footer className="mt-10"/>
+            </body>
+        </html>
     )
 }
 

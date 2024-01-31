@@ -2,44 +2,39 @@
 
 import { ApiService } from "@/utils/api-services"
 import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
 
 export const Login = async (prevState: any, formData: FormData) => {
     const { success, message, data } = parseFormData(formData)
+    let loginSuccess = false
     console.log(success, message, data)
     if (!success){
-        return {
-            success: success,
-            message: message 
-        }
+        return message 
     }
 
     try {
-        const apiService = new ApiService()
-        const body = {
-            username: data.username ?? "",
-            password: data.password ?? ""
-        }
-        const response = await apiService.post("admin/log-in", body, "no-cache")
+        
+        const response = await makeLoginRequest(data.username, data.password)
         if(!response.ok){
             const responseData = await response.json()
-            return {
-                success: false,
-                message: responseData.Message ?? "failed to login"
+            if(responseData.Status != undefined && responseData.Status == 401){
+                return "Incorrect username or password"
             }
+            return "there was an issue logging you in"
         }
+
         const responseData = await response.json()
         console.log(responseData)
         setHttpOnlyCookies("AUTH_TOKEN", responseData.Data?.data?.token ?? "uff")
-        return {
-            success: true,
-            message: "successfully logged in"
-        }
+        loginSuccess = true
+
     }catch(e: any){
         console.log(e)
-        return {
-            success: false,
-            message: e.message  as string ?? "failed to login user"
-        }
+        return "there was an issue logging you in"
+    }
+
+    if (loginSuccess){
+        redirect("/admin/appointment-requests")
     }
 }
 
@@ -73,4 +68,13 @@ const parseFormData = (formData: FormData) => {
             password: password,
         }
     }
+}
+
+const makeLoginRequest = async (username?: string, password?: string) => {
+    const apiService = new ApiService()
+        const body = {
+            username: username ?? "",
+            password: password ?? ""
+        }
+    return await apiService.post("admin/log-in", body, "no-cache")
 }

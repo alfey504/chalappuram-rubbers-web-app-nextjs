@@ -3,25 +3,13 @@
 import { useFormState, useFormStatus } from "react-dom"
 import { Login } from "./actions"
 import { CustomSubmitButton } from "@/components/custom-submit-button"
-import { redirect } from "next/navigation"
 
 export const LoginSection = ({
     className,
 }:{
     className?: string
 }) => {     
-    const [state, formAction] = useFormState(Login, {success: false, message: ""})
-    const { pending } = useFormStatus()
-
-    const { success, message } = state
-
-    if (success){
-        redirect("/admin")
-    }
-
-    if(pending){
-        return <Loading className={className}/>
-    }
+    const [state, formAction] = useFormState(Login, "")
 
     return (
         <div className={ "flex justify-center w-screen " + className ?? ""} >
@@ -35,21 +23,21 @@ export const LoginSection = ({
                     <label>Password: </label>
                     <input className="w-52 border-2 p-1 border-light-primary mt-1" type="password"  name="password" required={true}/> 
                 </div>
-                <div className="text-light-primary mt-2 text-sm">*{message}</div>
-                <CustomSubmitButton className="mt-10 mb-10" text="Login"/>
+                { state != "" && <div className="text-light-primary mt-2 text-sm">*{state}</div> }
+                <LoginSubmitButton className="mt-10 mb-10" />
             </form>
         </div>
     )
 }
 
-const Loading = ({
+const LoginSubmitButton = ({
     className,
-}:{
+}: {
     className?: string
 }) => {
-    return (
-        <div className={ "flex justify-center w-screen " + className ?? ""} >
-            <span className="text-xl text-light-primary font-bold">Logging you in please wait...</span>
-        </div>
-    )
-} 
+    const { pending } = useFormStatus()
+    if(pending){
+        return <div className={ "text-light-primary text-lg mt-10 mb-10"} >Logging you in ...</div>
+    }
+    return <CustomSubmitButton disabled={pending} className={className ?? ""} text="login"/>
+}

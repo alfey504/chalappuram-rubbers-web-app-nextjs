@@ -29,7 +29,6 @@ export const AppointmentForm = ({
     const classes = (className == undefined)? "" : className
 
     const [state, formAction ] = useFormState( submitBookAssignment, initialFormState)
-    const { pending } = useFormStatus()
 
     useEffect(()=>{
         if (date == ""){return}
@@ -75,10 +74,22 @@ export const AppointmentForm = ({
                     <div className="mt-3">Please select a date ..</div>
                 }
                 <Warning className="mt-10" message={state.message}/>
-                <CustomSubmitButton disabled={pending} className="mt-10 ml-32 md:ml-0" text="Request Appointment" />
+                <BookAppointmentButton className="mt-10 ml-32 md:ml-0"/>
             </form>
         </div>
     )
+}
+
+const BookAppointmentButton = ({
+    className
+}:{
+    className?: string
+}) => {
+    const { pending } = useFormStatus()
+    if(pending){
+        return <div className={className?? " " + " text-light-primary"}>Requesting appointment..</div>
+    }
+    return <CustomSubmitButton className={className ?? ""} text="Request Appointment" />
 }
 
 const Warning = ({ message, className }:{ message?: string, className?: string}): ReactElement => {

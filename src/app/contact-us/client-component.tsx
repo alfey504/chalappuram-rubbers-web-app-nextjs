@@ -18,9 +18,7 @@ export const MessageUs = ({
 }): ReactNode => {
 
     const [ state, formAction ] = useFormState(SendMessage, initialState)
-    const { pending } = useFormStatus()
 
-    const classes = (className == undefined)? "" : className
 
     if(state.success){
         return (
@@ -31,7 +29,7 @@ export const MessageUs = ({
     }
 
     return (
-        <div className={classes}>
+        <div className={className ?? ""}>
             <span className="p-3 text-2xl font-bold text-light-primary">Message Us</span>
             <form className=" flex flex-col mt-10" action={formAction} >
                 <div className="flex flex-col lg:flex-row">
@@ -49,14 +47,20 @@ export const MessageUs = ({
                 {state.message != undefined &&
                     <span className="mt-5 lg:ml-44 text-light-primary">*{state.message}</span>
                 }
-                {pending == true &&
-                    <CustomSubmitButton disabled={true} text="Sending.." className="mt-10 ml-20 lg:ml-72"/>
-                }
-                {pending == false &&
-                    <CustomSubmitButton text="Send" className="mt-10 ml-20 lg:ml-72"/>
-                }
-                
+                <SubmitMessageButton className="mt-10 ml-20 lg:ml-72"/>
             </form>
         </div>
     )
+}
+
+const SubmitMessageButton = ({
+    className
+}: {
+    className?: string
+}) => {
+    const { pending } = useFormStatus()
+    if(pending){
+        return <div className={className ?? ""}>Sending message...</div>
+    }
+    return<CustomSubmitButton text="Send" className={className ?? ""}/>
 }
