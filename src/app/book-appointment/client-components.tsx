@@ -59,13 +59,13 @@ export const AppointmentForm = ({
         <div className={classes}>
             <span className="text-2xl text-light-primary font-bold">Book an Appointment</span>
             <form className="flex flex-col mt-10" action={formAction} >
-                <label> Full Name : </label>
-                <input className="w-52 border-2 p-1 border-light-primary mt-1" type="text"  name="fullName" required={true}/> 
-                <label className="mt-10"> Email : </label>
-                <input className="w-52 border-2 p-1 border-light-primary mt-1" type="email" name="email"  required={true}/> 
-                <label className="mt-10">Date : </label>
-                <input className="w-52 border-2 p-1 border-light-primary mt-1" onChange={(t)=>{setDate(t.target.value)}} type="date" name="date" required={true} min={minDate}/> 
-                <label className="mt-10">Pick a time slot : </label>
+                <label className=" font-semibold"> Full Name : </label>
+                <input className="w-64 border-2 p-1 border-light-primary mt-1 rounded-md" type="text"  name="fullName" required={true}/> 
+                <label className="mt-5 font-semibold"> Email : </label>
+                <input className="w-64 border-2 p-1 border-light-primary mt-1 rounded-md" type="email" name="email"  required={true}/> 
+                <label className="mt-5 font-semibold">Date : </label>
+                <input className="w-64 border-2 p-1 border-light-primary mt-1 rounded-md" onChange={(t)=>{setDate(t.target.value)}} type="date" name="date" required={true} min={minDate}/> 
+                <label className="mt-10 font-semibold">Pick a time slot : </label>
                 {loading == false &&
                     <TimeSlotPicker className="mt-1" timeSlots={timeSlots} name="timeSlot" />
                 }{loading == true &&

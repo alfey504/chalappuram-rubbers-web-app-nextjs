@@ -56,11 +56,11 @@ const TimeSlotButton = ({
     const onSelection = (onSelect == undefined) ? (index: number) => {} : onSelect
     const isSelectedIndex = (selectedIndex == undefined || selectedIndex != index)
     
-    const commonClasses = "flex items-center justify-center h-16 w-96 border-2 mb-2 2xl:w-28 2xl:mr-2 "
+    const commonClasses = "flex items-center justify-center h-16 w-96 border-2 mb-2 2xl:w-28 2xl:mr-2 rounded-md "
     const SelectButton = (): ReactElement => {
         if(timeSlot.available == true && isSelectedIndex){
             return(
-                <div className={ commonClasses +  "bg-light-primary border-light-primary" } onClick={()=>{ onSelection(index) }}>
+                <div className={ commonClasses +  " bg-light-primary border-light-primary" } onClick={()=>{ onSelection(index) }}>
                     <span className=" text-light-primary">{timeSlot.time}</span>
                 </div>
             )
