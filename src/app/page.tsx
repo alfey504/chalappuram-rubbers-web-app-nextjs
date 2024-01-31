@@ -26,14 +26,13 @@ const IntroductionSection = (): ReactNode => {
           <div className="flex flex-col w-5/6 ml-5 pt-28 pb-28 md:w-4/6 lg:w-3/6 xl:w-2/6 md:ml-16">
             <text className="text-4xl text-light-primary font-bold">CHALAPPURAM RUBBERS</text>
             <text className="mt-5">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry standard dummy text ever since the 1500s,
-              when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-              It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
+              Ready to cash in on your rubber sheets, nutmeg, arecanut, mace spice, or pepper? 
+              Look no further! We offer top-notch prices for your quality products. 
+              Bring them to us and unlock the best deals in town!
             </text>
             <div className="flex flex-row mt-10">
-              <LinkButton text="CHECK PRICES" className="pt-2 pb-2 pl-3 pr-3"/>
-              <LinkButton text="BOOK AN APPOINTMENT" className="pt-2 pb-2 pl-3 pr-3 ml-5"/>
+              <LinkButton link="/check-prices" text="CHECK PRICES" className="pt-2 pb-2 pl-3 pr-3"/>
+              <LinkButton link="/book-appointment" text="BOOK AN APPOINTMENT" className="pt-2 pb-2 pl-3 pr-3 ml-5"/>
             </div>
           </div>
         </div>
@@ -57,11 +56,11 @@ const WhatWeDoSection = ({
       <div className="w-full flex flex-col items-center justify-center mt-10 md:items-end md:mt-5 md:mb-5">
         <text className="text-3xl text-light-primary font-bold">WHAT WE DO?</text>
         <text className=" text-center mt-5 md:text-end">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-          Lorem Ipsum has been the industry standard dummy text ever since the 1500s, 
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-          It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-          It was popularised in the 1960s with the release of Letraset sheets 
+            Established in 1987, our business is dedicated to sourcing and acquiring top-quality rubber sheets, nutmeg, arecanut, mace spice, and pepper. 
+            At our core, we thrive on providing fair and competitive prices for your goods, valuing quality above all.  
+            Our pricing model is based on the weight of the products per kilogram, ensuring a transparent and equitable transaction. 
+            With decades of experience in the rubber sheet trading business, we have honed our expertise in evaluating and rewarding superior product quality. 
+            Entrust us with your offerings, and let our longstanding commitment to excellence guarantee you a lucrative and satisfying trade. 
         </text>
       </div>
     </div>
@@ -79,11 +78,10 @@ const FindUsSection = ({
       <div className="w-full flex flex-col items-center justify-center order-2 mt-10 md:order-1 md:items-start md:mt-5 md:mb-5">
         <text className="text-3xl text-light-primary font-bold">FIND US?</text>
         <text className=" text-center mt-5 md:text-left">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-          Lorem Ipsum has been the industry standard dummy text ever since the 1500s, 
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-          It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-          It was popularised in the 1960s with the release of Letraset sheets 
+          Discover our convenient location at Chalappuram Rubbers in Vennikulam, Ernakulam, Kerala, India. 
+          Situated on the Vennikulam-Piravom road, adjacent to Vennikulam Junction and opposite St. Georges HSS Vennikulam, our establishment is easily accessible from the intersection of Vennikulam-Piravom road and Hospital road.
+          Positioned along the route from Sasthamugal to Piravom, our address is strategically located at Vennikulam, Ernakulam, with the postal code 682305. 
+          Whether you're in search of quality rubber sheets, nutmeg, arecanut, mace spice, or pepper, our location provides a seamless and recognizable destination for all your trading needs. 
         </text>
         <a className="mt-5 text-light-primary underline hover:font-bold" href='https://maps.app.goo.gl/C9Rz9arLnyvUqG2d8'>Open location in Google Maps</a>
       </div>
