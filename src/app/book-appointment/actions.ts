@@ -3,6 +3,7 @@
 import { ApiService } from "@/utils/api-services"
 import { revalidatePath } from "next/cache"
 import { FormStateType } from "./client-components"
+import { TimeSlot } from "@/utils/time-slot-manager"
 
 
 type AppointmentData = {
@@ -53,3 +54,35 @@ const parseFormData = (formData: FormData): AppointmentData => {
         timeSlot: time,
    }
  }
+
+ export const getTimeSlots = async (date: string): Promise< TimeSlot[] | undefined > => {
+    try{
+        const apiService = new ApiService()
+        const data = {
+            date: date
+        }
+        const response = await apiService.get("appointment/available", data)
+        const responseJson = await response.json()
+
+        if(!response.ok){
+            return undefined
+        }
+
+        // TODO: use zod later
+        const responseTimeSlots = responseJson.Data.data
+        const timeSlots: TimeSlot[] = []
+        for(let i=0; i < responseTimeSlots.length; i+=1){
+            const timeSlot: TimeSlot = {
+                time: responseTimeSlots[i].Time,
+                available: responseTimeSlots[i].Available
+            }
+            timeSlots.push(timeSlot)
+        }
+        return timeSlots
+        
+    }catch(e){
+        console.log(e)
+        return undefined
+    }
+}
+

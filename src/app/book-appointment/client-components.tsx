@@ -4,8 +4,7 @@ import { CustomSubmitButton } from "@/components/custom-submit-button"
 import { TimeSlotPicker } from "@/components/time-slot-picker"
 import { TimeSlot } from "@/utils/time-slot-manager"
 import { ReactElement, useEffect, useState } from "react"
-import { submitBookAssignment } from "./actions"
-import { ApiService } from "@/utils/api-services"
+import { getTimeSlots, submitBookAssignment } from "./actions"
 import { useFormState, useFormStatus } from "react-dom"
 
 export type FormStateType = {
@@ -99,33 +98,3 @@ const Success = ({message}:{message: string}):ReactElement => {
     )
 }
 
-const getTimeSlots = async (date: string): Promise< TimeSlot[] | undefined > => {
-    try{
-        const apiService = new ApiService()
-        const data = {
-            date: date
-        }
-        const response = await apiService.get("appointment/available", data)
-        const responseJson = await response.json()
-
-        if(!response.ok){
-            return undefined
-        }
-
-        // TODO: use zod later
-        const responseTimeSlots = responseJson.Data.data
-        const timeSlots: TimeSlot[] = []
-        for(let i=0; i < responseTimeSlots.length; i+=1){
-            const timeSlot: TimeSlot = {
-                time: responseTimeSlots[i].Time,
-                available: responseTimeSlots[i].Available
-            }
-            timeSlots.push(timeSlot)
-        }
-        return timeSlots
-        
-    }catch(e){
-        console.log(e)
-        return undefined
-    }
-}
