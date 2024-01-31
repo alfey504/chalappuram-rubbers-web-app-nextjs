@@ -9,7 +9,7 @@ export default async function CheckPrices(): Promise<ReactElement> {
 
     if(!success || data == undefined){
         return (
-            <div className="flex justify-center items-center"><span>message</span></div>
+            <div className="flex justify-center items-center"><span>{message}</span></div>
         )
     }
 
@@ -67,9 +67,9 @@ const GoodsRow = ({
     return(
         <tr>
             <td className={className + " text-light-primary"}>{goods}</td>
-            <td className={className}>₹{prices.MaxPrice}</td>
-            <td className={className}>₹{prices.AvgPrice}</td>
-            <td className={className}>₹{prices.MinPrice}</td>
+            <td className={className}>{prices.MaxPrice}</td>
+            <td className={className}>{prices.AvgPrice}</td>
+            <td className={className}>{prices.MinPrice}</td>
         </tr>
     )
 }
@@ -91,9 +91,10 @@ type GoodsPrices = {
 const getGoodsPrices = async () => {
     try {
         const apiService = new ApiService()
-        const response = await apiService.get("goods", {}, undefined, "no-cache")
+        const response = await apiService.get("goods", undefined, "no-cache")
         const data = await response.json()
         const goodsPrices: GoodsPrices = data.Data.data
+        console.log(goodsPrices)
         return {success: true, data: goodsPrices, message: "success"}
     }catch(e: any){
         console.log(e)

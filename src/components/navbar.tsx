@@ -34,8 +34,8 @@ export const NavBar = ({
         </div>
         { showMenu == true &&
           <div className=" bg-light-secondary text-white flex flex-col w-screen justify-center pt-2 pb-2 lg:hidden">
-           <a href="/" className=" w-screen text-center text-light-secondary pt-2 pb-2 hover:font-bold">CHECK PRICE</a> 
-           <a href="/" className=" w-screen text-center text-light-secondary pt-2 pb-2 hover:font-bold">BOOK AN APPOINTMENT</a>
+           <a href="/check-prices" className=" w-screen text-center text-light-secondary pt-2 pb-2 hover:font-bold">CHECK PRICE</a> 
+           <a href="/book-appointment" className=" w-screen text-center text-light-secondary pt-2 pb-2 hover:font-bold">BOOK AN APPOINTMENT</a>
            <a href="/contact-us" className=" w-screen text-center text-light-secondary pt-2 pb-2 hover:font-bold">CONTACT US</a>
           </div>
         }

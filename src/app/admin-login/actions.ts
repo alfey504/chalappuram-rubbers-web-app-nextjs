@@ -13,7 +13,6 @@ export const Login = async (prevState: any, formData: FormData) => {
     }
 
     try {
-        
         const response = await makeLoginRequest(data.username, data.password)
         if(!response.ok){
             const responseData = await response.json()
