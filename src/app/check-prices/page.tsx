@@ -1,10 +1,11 @@
 import { Footer } from "@/components/footer";
 import { NavBar } from "@/components/navbar";
 import { ApiService } from "@/utils/api-services";
+import { revalidatePath } from "next/cache";
 import { ReactElement } from "react"
 
 export default async function CheckPrices(): Promise<ReactElement> {
-
+    
     const {success, data, message} = await getGoodsPrices();
 
     if(!success || data == undefined){
@@ -89,12 +90,14 @@ type GoodsPrices = {
 }
 
 const getGoodsPrices = async () => {
+    "use server"
     try {
         const apiService = new ApiService()
-        const response = await apiService.get("goods", undefined, "no-cache")
+        const response = await apiService.get("goods", undefined, "no-store")
         const data = await response.json()
         const goodsPrices: GoodsPrices = data.Data.data
         console.log(goodsPrices)
+        revalidatePath("/")
         return {success: true, data: goodsPrices, message: "success"}
     }catch(e: any){
         console.log(e)
