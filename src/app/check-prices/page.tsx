@@ -1,6 +1,7 @@
 import { Footer } from "@/components/footer";
 import { NavBar } from "@/components/navbar";
 import { ApiService } from "@/utils/api-services";
+import { prettierDate } from "@/utils/datetime-utils";
 import { revalidatePath } from "next/cache";
 import { ReactElement } from "react"
 
@@ -17,8 +18,8 @@ export default async function CheckPrices(): Promise<ReactElement> {
     return ( 
         <main>
             <NavBar />
-            <Prices className="mt-20" goodsPrices={data}/>
-            <Footer className="mt-20"/>
+            <Prices className="mt-10 mx-2 md:mx-10" goodsPrices={data}/>
+            <Footer className="mt-14"/>
         </main>   
     )
 }
@@ -30,52 +31,73 @@ const Prices = ({
     className?: string,
     goodsPrices: GoodsPrices
 }): ReactElement => {
-    const classes = (className == undefined) ? "" : className
-    const titleClasses = "h-16 text-white text-xl font-light"
     return(
-        <div className={classes  + " flex flex-col items-center justify-center"}>
-            <span className=" text-2xl text-light-primary font-bold">Prices</span>
-            <table className="mt-10 rounded-lg w-10/12 sm:w-4/5">
-                <thead>
-                    <tr className="bg-light-secondary">
-                        <th className={titleClasses}>produce</th>
-                        <th className={titleClasses}>best price</th>
-                        <th className={titleClasses}>average price</th>
-                        <th className={titleClasses}>worst price</th>
+        <div className={className ?? ""}>
+            <div className="flex flex-row flex-wrap justify-around">
+                <GoodsTable className="mt-5" goodsName="Rubber" goodsPrice={goodsPrices.Rubber}/>
+                <GoodsTable className="mt-5" goodsName="Pepper" goodsPrice={goodsPrices.Pepper}/>
+                <GoodsTable className="mt-5" goodsName="Arecanut" goodsPrice={goodsPrices.Arecanut}/>
+                <GoodsTable className="mt-5" goodsName="Nutmeg" goodsPrice={goodsPrices.Nutmeg}/>
+                <GoodsTable className="mt-5" goodsName="Mace" goodsPrice={goodsPrices.Mace}/>
+            </div>
+        </div>
+    )
+}
+
+const GoodsTable = ({
+    className,
+    goodsName,
+    goodsPrice
+}:{
+    className?: string,
+    goodsName: string
+    goodsPrice: Prices
+}) => {
+
+    return (
+        <div className={className ?? ""}>
+            <table className="rounded-lg ">
+                <thead className="bg-light-secondary">
+                    <tr className="flex flex-col items-start  text-light-secondary p-2 px-4 rounded-md py-5">
+                        <th  className="text-xl font-bold">{goodsName}</th>
+                        <th className="font-semibold"> Source : {goodsPrice.Source}</th>
+                        <th className="font-medium">updated on: { prettierDate(goodsPrice.DateUpdated)}</th>
                     </tr>
                 </thead>
-                <tbody className="[&>*:nth-child(even)]:bg-light-alt">
-                    <GoodsRow prices={goodsPrices.Rubber} goods="Rubber" />
-                    <GoodsRow prices={goodsPrices.Pepper} goods="Pepper" />
-                    <GoodsRow prices={goodsPrices.Nutmeg} goods="Nutmeg" />
-                    <GoodsRow prices={goodsPrices.Mace} goods="Mace" />
-                </tbody>
-
+                <GoodsPrices  prices={goodsPrice}/>
             </table>
         </div>
     )
 }
 
-const GoodsRow = ({
+const GoodsPrices = ({
     prices,
-    goods,
 }:{
     prices: Prices,
-    goods: string,
 }): ReactElement => {
-
-    const className = "text-center h-16 text-xl pl-5 sm:h-24"
+    const className = "text-lg h-12 p-2"
     return(
-        <tr>
-            <td className={className + " text-light-primary"}>{goods}</td>
-            <td className={className}>{prices.MaxPrice}</td>
-            <td className={className}>{prices.AvgPrice}</td>
-            <td className={className}>{prices.MinPrice}</td>
-        </tr>
+        <tbody className="[&>*:nth-child(even)]:bg-light-alt">
+            <tr>
+                <td className={className}>Average Price</td>
+                <td className={className}>{prices.AvgPrice}</td>
+            </tr>
+            <tr>
+                <td className={className}>Minimum Price</td>
+                <td className={className}>{prices.MinPrice}</td>
+            </tr>
+            <tr>
+                <td className={className}>Maximum Price</td>
+                <td className={className}>{prices.MaxPrice}</td>
+            </tr>
+        </tbody>
     )
 }
 
 type Prices = {
+    Source: string,
+    SourceLink: string,
+    DateUpdated: string,
     MaxPrice: string,
     AvgPrice: string,
     MinPrice: string,
