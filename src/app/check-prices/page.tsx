@@ -6,15 +6,12 @@ import { revalidatePath } from "next/cache";
 import { ReactElement } from "react"
 
 export default async function CheckPrices(): Promise<ReactElement> {
-    
     const {success, data, message} = await getGoodsPrices();
-
     if(!success || data == undefined){
         return (
             <div className="flex justify-center items-center"><span>{message}</span></div>
         )
     }
-
     return ( 
         <main>
             <NavBar />
@@ -34,11 +31,11 @@ const Prices = ({
     return(
         <div className={className ?? ""}>
             <div className="flex flex-row flex-wrap justify-around">
-                <GoodsTable className="mt-5" goodsName="Rubber" goodsPrice={goodsPrices.Rubber}/>
-                <GoodsTable className="mt-5" goodsName="Pepper" goodsPrice={goodsPrices.Pepper}/>
-                <GoodsTable className="mt-5" goodsName="Arecanut" goodsPrice={goodsPrices.Arecanut}/>
-                <GoodsTable className="mt-5" goodsName="Nutmeg" goodsPrice={goodsPrices.Nutmeg}/>
-                <GoodsTable className="mt-5" goodsName="Mace" goodsPrice={goodsPrices.Mace}/>
+                <GoodsTable className="mt-10" goodsName="Rubber" goodsPrice={goodsPrices.Rubber}/>
+                <GoodsTable className="mt-10" goodsName="Pepper" goodsPrice={goodsPrices.Pepper}/>
+                <GoodsTable className="mt-10" goodsName="Arecanut" goodsPrice={goodsPrices.Arecanut}/>
+                <GoodsTable className="mt-10" goodsName="Nutmeg" goodsPrice={goodsPrices.Nutmeg}/>
+                <GoodsTable className="mt-10" goodsName="Mace" goodsPrice={goodsPrices.Mace}/>
             </div>
         </div>
     )
@@ -56,16 +53,16 @@ const GoodsTable = ({
 
     return (
         <div className={className ?? ""}>
-            <table className="rounded-lg ">
-                <thead className="bg-light-secondary">
-                    <tr className="flex flex-col items-start  text-light-secondary p-2 px-4 rounded-md py-5">
-                        <th  className="text-xl font-bold">{goodsName}</th>
-                        <th className="font-semibold"> Source : {goodsPrice.Source}</th>
-                        <th className="font-medium">updated on: { prettierDate(goodsPrice.DateUpdated)}</th>
-                    </tr>
-                </thead>
-                <GoodsPrices  prices={goodsPrice}/>
-            </table>
+            <div>
+                <div className="flex flex-col items-start bg-light-secondary text-light-secondary p-2 px-4 rounded-md py-5">
+                    <span  className="text-xl font-bold">{goodsName}</span>
+                    <span className="font-semibold"> Source : {goodsPrice.Source}</span>
+                    <span className="font-medium">updated on: { prettierDate(goodsPrice.DateUpdated)}</span>
+                </div>
+                <table className="rounded-lg">
+                    <GoodsPrices  prices={goodsPrice}/>
+                </table>
+            </div>
         </div>
     )
 }
@@ -75,7 +72,7 @@ const GoodsPrices = ({
 }:{
     prices: Prices,
 }): ReactElement => {
-    const className = "text-lg h-12 p-2"
+    const className = "text-lg h-12 p-4"
     return(
         <tbody className="[&>*:nth-child(even)]:bg-light-alt">
             <tr>
