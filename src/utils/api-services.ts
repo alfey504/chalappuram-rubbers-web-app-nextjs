@@ -49,12 +49,18 @@ export class ApiService {
 
     async put(
         endpoint: string, 
+        params: any,
         data: any, 
         cache?: RequestCache,
         token?: string
     ): Promise<Response>{
 
-        const uri = this.baseURI + endpoint
+        let queryString = ""
+        if (params != undefined){
+            queryString = this.makeQueryString(params)
+        }
+        const uri = this.baseURI + endpoint + queryString
+        
         const response = await fetch(uri, {
             "method": "PUT",
             "cache": cache,

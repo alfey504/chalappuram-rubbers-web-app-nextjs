@@ -15,7 +15,7 @@ export default async function CheckPrices(): Promise<ReactElement> {
     return ( 
         <main>
             <NavBar />
-            <Prices className="mt-10 mx-2 md:mx-10" goodsPrices={data}/>
+            <Prices className="mt-10 mx-2 md:mx-10 h-full" goodsPrices={data}/>
             <Footer className="mt-14"/>
         </main>   
     )
@@ -28,14 +28,16 @@ const Prices = ({
     className?: string,
     goodsPrices: GoodsPrices
 }): ReactElement => {
+
+    const tableClasses = "mt-10 lg:mx-10 2xl:mx-20"
     return(
         <div className={className ?? ""}>
             <div className="flex flex-row flex-wrap justify-around">
-                <GoodsTable className="mt-10" goodsName="Rubber" goodsPrice={goodsPrices.Rubber}/>
-                <GoodsTable className="mt-10" goodsName="Pepper" goodsPrice={goodsPrices.Pepper}/>
-                <GoodsTable className="mt-10" goodsName="Arecanut" goodsPrice={goodsPrices.Arecanut}/>
-                <GoodsTable className="mt-10" goodsName="Nutmeg" goodsPrice={goodsPrices.Nutmeg}/>
-                <GoodsTable className="mt-10" goodsName="Mace" goodsPrice={goodsPrices.Mace}/>
+                <GoodsTable className={tableClasses} goodsName="Rubber" goodsPrice={goodsPrices.Rubber}/>
+                <GoodsTable className={tableClasses} goodsName="Pepper" goodsPrice={goodsPrices.Pepper}/>
+                <GoodsTable className={tableClasses} goodsName="Arecanut" goodsPrice={goodsPrices.Arecanut}/>
+                <GoodsTable className={tableClasses} goodsName="Nutmeg" goodsPrice={goodsPrices.Nutmeg}/>
+                <GoodsTable className={tableClasses} goodsName="Mace" goodsPrice={goodsPrices.Mace}/>
             </div>
         </div>
     )
@@ -56,7 +58,7 @@ const GoodsTable = ({
             <div>
                 <div className="flex flex-col items-start bg-light-secondary text-light-secondary p-2 px-4 rounded-md py-5">
                     <span  className="text-xl font-bold">{goodsName}</span>
-                    <span className="font-semibold"> Source : {goodsPrice.Source}</span>
+                    <span className=""> Source : <a className=" hover:underline" href={goodsPrice.SourceLink}>{goodsPrice.Source}</a></span>
                     <span className="font-medium">updated on: { prettierDate(goodsPrice.DateUpdated)}</span>
                 </div>
                 <table className="rounded-lg">

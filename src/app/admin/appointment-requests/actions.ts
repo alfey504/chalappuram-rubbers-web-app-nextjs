@@ -41,10 +41,10 @@ export const ApproveAppointment = async (id: number) => {
             id: id,
             approved: true
         }
-        const response = await apiService.put("admin/appointment", data, "no-cache", token)
+        const response = await apiService.put("admin/appointment", {} ,data,"no-store", token)
         if(!response.ok){
             const responseData = await response.json()
-            console.log("response : " + responseData)
+            console.log("response : " + responseData.Message)
             return false
         }
         const responseData = await response.json()
