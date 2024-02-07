@@ -22,8 +22,9 @@ export const MessageUs = ({
 
     if(state.success){
         return (
-            <div className="flex justify-center items-center mt-10 mb-28">
-                <span className="text-light-primary text-xl">{state.message}</span>
+            <div className="flex flex-col justify-center items-center mt-10 mb-28">
+                <span className="text-light-primary text-xl text-bold text-center">We have received your message.</span>
+                <span className="text-light-primary text-center"> We will write back to the provided email</span>
             </div>
         )
     }

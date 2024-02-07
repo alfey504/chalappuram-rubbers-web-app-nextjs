@@ -46,7 +46,7 @@ export const AppointmentForm = ({
 
 
     if (state.success){
-        return <Success message={(state.message == undefined)? "Successfully request for appointment": state.message }/>
+        return <Success message={(state.message == undefined)? "A verification email has been sent to your email. Please check your email": state.message }/>
     }
 
     const minDate = function ():string{
@@ -74,7 +74,7 @@ export const AppointmentForm = ({
                     <div className="mt-3">Please select a date ..</div>
                 }
                 <Warning className="mt-10" message={state.message}/>
-                <BookAppointmentButton className="mt-10 ml-32 md:ml-0"/>
+                <BookAppointmentButton className="mt-10 ml-0 md:ml-0"/>
             </form>
         </div>
     )
@@ -103,8 +103,10 @@ const Warning = ({ message, className }:{ message?: string, className?: string})
 
 const Success = ({message}:{message: string}):ReactElement => {
     return (
-        <div className="flex justify-center items-center w-full h-full mt-72 mb-64">
-            <span className="text-light-primary text-3xl">{message}</span>
+        <div className="flex flex-col justify-center items-center w-full h-full mt-56 mb-64">
+            <span className="text-light-primary font-bold md:text-2xl text-center w-screen mx-5">A verification email has been sent to your email. Please check your email</span>
+            <span className="text-light-primary  text-center w-screen mt-5 mx-5">Note if the email is not verified by the end of the day the appointment will be canceled</span>
+            <a href="\" className="text-light-primary text-center underline mt-5">Go to homepage</a>
         </div>
     )
 }
