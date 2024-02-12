@@ -9,7 +9,7 @@ export default function VerifyAppointment( { searchParams } : { searchParams: an
     return (
         <main>
             <NavBar />
-            <Message verification_hash={searchParams.verification_hash}  className=" h-screen"/>
+            <Message verification_hash={searchParams.verification_hash}  className=" min-h-screen flex flex-col w-screen justify-center items-center"/>
             <Footer />
         </main> 
     )
@@ -29,7 +29,7 @@ const Message = async ({
     const message = await verifyAppointment(verification_hash)
     return (
         <div className={className ?? ""}>
-            <span>{message}</span>
+            <span className=" text-2xl text-light-primary font-semibold">{message}</span>
         </div>
     )
 }
